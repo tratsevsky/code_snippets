@@ -21,8 +21,28 @@ def read_from_console(console):
     else:
         return False
 
+def check_initial_configuration_dialog(console):
+    run_command(console, '\n')
+    prompt = read_from_console(console)
+    if "Would you like to enter the initial configuration dialog?" in promt:
+        run_command(console, 'no', 15)
+        run_command(console, '\r\n')
+
+
 con = open_console()
 run_command(con)
 run_command(con, 'show version')
 output = read_from_console()
+print(output)
+
+# Here we test check_initial_configuration_dialog function
+
+console = open_console()
+check_initial_configuration_dialog(console)
+run_command('enable')
+run_command('configure terminal')
+run_command('username u1 password cisco')
+run_command('end')
+
+output = read_from_console(console)
 print(output)
