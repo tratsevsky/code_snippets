@@ -1,6 +1,6 @@
 import helper_paramiko
 
-ssh_client = helper_paramiko.connect('10.1.1.10', 'admin', 'cisco')
+ssh_client = helper_paramiko.connect('10.1.1.10', 22, 'admin', 'cisco')
 remote_connection = helper_paramiko.get_shell(ssh_client)
 
 helper_paramiko.send_command(remote_connection, 'enable')
