@@ -10,13 +10,11 @@ ios.open()
 # list all available methods
 # print(dir(ios))
 
-output = ios.get_arp_table()
-# print(type(output))
-# for item in output:
-#     print(item)
+# output = ios.get_facts()
+# output = ios.get_interfaces()
+output = ios.ping(destination='10.1.1.22', count=2)
 
-dump = json.dumps(output, sort_keys=True, indent=4)
-with open('arp.txt', 'w') as f:
-    f.write(dump)
+dump = json.dumps(output, sort_keys=True, indent=2)
+print(dump)
 
 ios.close()
