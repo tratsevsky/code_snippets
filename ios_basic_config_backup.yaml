@@ -1,0 +1,10 @@
+---
+- name: Configuring Cisco IOS devices
+  gather_facts: no
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Backup running-config
+      ios_config: # this is a name of used Ansible module
+        backup: yes

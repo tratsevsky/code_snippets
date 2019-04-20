@@ -1,0 +1,19 @@
+---
+- name: Configuring Cisco IOS devices
+  gather_facts: no
+  hosts: routers
+  connection: network_cli
+
+  tasks:
+    - name: Configure OSPF
+      ios_config: # this is a name of used Ansible module
+        save_when: modified
+        lines:
+          - network 0.0.0.0 0.0.0.0 area 0
+          - distance 50
+          - default-information originate
+        parents: router ospf 1
+      register: output
+
+    - name: Printing at the console
+      debug: var=output
