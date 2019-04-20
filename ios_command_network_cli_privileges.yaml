@@ -1,0 +1,29 @@
+---
+- name: Running show commands on Cisco IOS
+  hosts: router1
+  gather_facts: false
+  connection: network_cli
+  become: yes
+  become_method: enable
+
+  vars: # playbook keyword (dictionary of variables)
+    ansible_user: u1  # Special vars called Behavioral Inventory Parameters
+    ansible_ssh_pass: cisco
+    ansible_become_pass: cisco
+    ansible_network_os: ios
+
+  tasks:
+    - name: Run multiple commands on cisco IOS nodes
+      ios_command:
+        commands:
+          - show run
+      register: print_output
+
+    - debug: var=print_output.stdout_lines
+
+#Description:
+#Old method prior to Ansible 2.5 using connection: local instead of connection: network_cli
+#
+#Command to run:
+#ansible-playbook -i ./hosts ./ios_command_local.yaml -u username -k
+#both hosts and yaml files are in the current working directory
